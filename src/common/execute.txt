@@ -1,1 +1,0 @@
-C:\Users\Administrator\PycharmProjects\dev_derfu/src/list\test_login.py

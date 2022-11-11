@@ -83,22 +83,14 @@ class DingTalkSendMsg:
             pic_url=pic_url
         )
 
-    def send_markdown(
-            self,
-            title: Text,
-            msg: Text,
-            mobiles=None,
-            is_at_all=False
-    ) -> None:
+    def send_markdown( self,title: Text, msg: Text,mobiles=None,is_at_all=False):
         """
-
         :param is_at_all:
         :param mobiles:
         :param title:
         :param msg:
         markdown 格式
         """
-
         if mobiles is None:
             self.xiao_ding().send_markdown(title=title, text=msg, is_at_all=is_at_all)
         else:
@@ -141,7 +133,7 @@ class DingTalkSendMsg:
                f" \n\n>失败用例数: {self.metrics['failed']} " \
                f" \n\n>异常用例数: {self.metrics['broken']} " \
                f"\n\n>跳过用例数: {self.metrics['skipped']}\n" \
-               f" > ###### [测试报告详情](http://{get_host_ip()}:63342/index.html) \n"
+               f" > ###### [测试报告详情](http://192.168.11.181/job/test/allure) \n"
         DingTalkSendMsg(AllureFileClean().get_case_count()).send_markdown(
             title="【接口自动化通知】",
             msg=text,

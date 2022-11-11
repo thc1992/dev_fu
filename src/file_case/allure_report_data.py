@@ -45,7 +45,7 @@ class AllureFileClean:
         return values
 
     @classmethod
-    def get_case_count(cls) -> "TestMetrics":
+    def get_case_count(cls):
         """ 统计用例数量 """
         try:
 
@@ -76,8 +76,6 @@ class AllureFileClean:
             raise FileNotFoundError(
                 "程序中检查到您未生成allure报告，"
                 "通常可能导致的原因是allure环境未配置正确，"
-                "详情可查看如下博客内容："
-                "https://blog.csdn.net/weixin_43865008/article/details/124332793"
             ) from exc
 
 

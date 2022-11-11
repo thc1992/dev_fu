@@ -71,3 +71,15 @@ def generate_excute_file(file_path):
                 File.writelines(filePath + '\n')
             File.close()
         time.sleep(1)
+
+
+def reader_pro(path):
+    """
+    环境显示
+    """
+    with open(path + '/environment.properties', 'r') as f:
+        with open(path + '/report/tmp/environment.properties', 'w+', encoding='utf-8') as file:
+            for i in f.readlines():
+                file.writelines(i)
+            file.close()
+        f.close()

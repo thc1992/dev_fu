@@ -1,0 +1,7 @@
+allure-pytest==2.11.1
+allure_python_commons==2.11.1
+DingtalkChatbot==1.5.3
+PyMySQL==1.0.2
+pytest==7.1.2
+PyYAML==6.0
+requests==2.26.0

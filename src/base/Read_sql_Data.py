@@ -1,22 +1,23 @@
 # encoding=utf-8
 import pymysql
-from src.base.URL_link import *
 import base64
+
+from src.read_yaml.read_yaml import Read_yaml
 
 
 class Read_sql_Data(object):
     # def __init__(self):
-    #     self.user = 'root'
 
     @classmethod
-    def Conte(self, host,passwd, port, sql):
+    def Conte(self,sql):
         # connectin = pymysql.Connect(host=host, database=database, user=self.user, password=passwd,
         #                             port=port, charset='utf8mb4')
-
-        connectin = pymysql.Connect(host=host, user='root', password=passwd,
-                                    port=port, charset='utf8mb4')
-
-        print(sql)
+        user = 'root'
+        host = Read_yaml().yaml_show('mysql_db')['host']
+        passwd = Read_yaml().yaml_show('mysql_db')['password']
+        port = Read_yaml().yaml_show('mysql_db')['port']
+        connectin = pymysql.Connect(host=host, user=user, password=passwd,port=port, charset='utf8mb4')
+        # print(sql)
         c = connectin.cursor()
         c.execute(sql)
         name = c.fetchall()  # 读取数据数据

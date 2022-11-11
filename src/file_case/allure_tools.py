@@ -1,13 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""
-# @Time   : 2022/4/7 17:53
-# @Author : 余少琪
-"""
 import json
 import allure
 
 from src.base.modles import AllureAttachmentType
+from src.read_yaml.read_yaml import Read_yaml
 
 
 def allure_step(step: str, var: str) -> None:
@@ -63,3 +60,51 @@ def allure_step_no(step: str):
     """
     with allure.step(step):
         pass
+
+
+def log_show(res, datas, showlog=1):
+    if showlog == 1:
+        if Read_yaml().yaml_show('is_run'):
+            _log_msg = f"\n==========================================================================\n" \
+                       f"请求路径: {res.request.url}\n" \
+                       f"请求方式: {res.request.method}\n" \
+                       f"请求头:   {res.request.headers}\n" \
+                       f"请求内容: {datas}\n" \
+                       f"接口响应内容: {res.text}\n" \
+                       f"Http状态码: {res.status_code}\n" \
+                       "================================================================================="
+            if res.status_code == 200:
+                """ 在allure中记录请求数据 """
+                allure_step_no(f"请求URL: {res.request.url}")
+                allure_step_no(f"请求方式: {res.request.method}")
+                allure_step("请求头: ", res.request.headers)
+                allure_step("请求数据: ", datas)
+                allure_step("响应结果: ", res.text)
+                # 打印请求数据
+
+                print('\n\033[92m' + f"请求URL: {res.request.url}")
+                print('\033[92m' + f"请求方式: {res.request.method}")
+                print('\033[92m' + f"请求头: {res.request.headers}")
+                print('\033[92m' + f"请求数据: {datas}")
+                print('\033[92m' + f"响应结果: {res.text}")
+
+            else:
+                """ 在allure中记录请求数据 """
+                allure_step_no(f"请求URL: {res.request.url}")
+                allure_step_no(f"请求方式: {res.request.method}")
+                allure_step("请求头: ", res.request.headers)
+                allure_step("请求数据: ", datas)
+                allure_step("响应结果: ", res.text)
+
+                print('\n\033[91m' + f"请求URL: {res.request.url}")
+                print('\033[91m' + f"请求方式: {res.request.method}")
+                print('\033[91m' + f"请求头: {res.request.headers}")
+                print('\033[91m' + f"请求数据: {datas}")
+                print('\033[91m' + f"响应结果: {res.text}")
+
+        if "access_token" in res.json():
+            json_str = {'access_token': res.json()['access_token']}
+            # Read_yaml().write_yaml(json_str)
+            old_data = Read_yaml().read_yaml_all('token.yaml')  # 读取文件数据
+            old_data['access_token'] = json_str
+            Read_yaml().update_yaml(old_data, 'token.yaml')

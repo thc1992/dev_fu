@@ -1,13 +1,16 @@
 # encoding=utf-8
 import os
+import re
 
 import pymysql, json
 from datetime import date, datetime
+import requests
 
 from src.Search.Sql_search import *
 from src.base.Read_sql_Data import *
 from src.base.request_Control import r_idempotent
 from src.read_yaml.read_yaml import Read_yaml
+import pyautogui
 
 user = 'root'
 host = Read_yaml().yaml_show('mysql_db')['host']
@@ -84,24 +87,13 @@ def listToJson(lst):
 # get_result(name)
 
 
-s = ["task_summary_id", "taskOrderId", "workOrderId", "requestOrderId", "workSummaryId", "quoteId",
-     "additionalQuote_feedetailid", "additionalQuote_unitPrice", "additionalQuote_unit", "additionalQuote_propId",
-     "additionalQuote_propName", "generalConfig_id", "generalConfig_companyId", "generalConfig_quoteSetting",
-     "generalConfig_settlementSetting", "quoteDetail_feedetailid", "quoteDetail_unitPrice",
-     "quoteDetail_productionName", "quoteDetail_profCode", "quoteDetail_cityId", "quoteDetail_areaId",
-     "quoteDetail_dayNight", "quoteDetail_holidaysFestivals", "quoteDetail_urgencyDegree", "quoteDetail_cityLevel",
-     "materialDetail_id", "transportFee_id", "measuresFee_id"]
+# userId = Read_yaml().yaml_show('login')['user_name']
+# print(userId)
+#
+# print(sql_user_id %str(userId))
+# user_id = Read_sql_Data.Conte(sql_user_id % str(userId))
+#
+# print(user_id)
 
 
-# json={"task_summary_id":task_summary_id,}
 
-# liststr = []
-# for x in range(len(s)):
-#     key = str(s[x])
-#     value = s[x]
-#     liststr.append({key: value})
-#     str_json = json.dumps(liststr, cls=ComplexEncoder, ensure_ascii=False)
-#     name = json.loads(str_json)
-# print(str(name).replace())
-# print(name[0]["task_summary_id"])
-# print(name[1]["taskOrderId"])

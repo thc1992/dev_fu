@@ -17,7 +17,7 @@ class Test_login(object):
     @allure.title("正常登录")  # 测试用例的标题
     @allure.testcase('/rdp-auth/oauth/token')
     @pytest.mark.one
-    def test_login(self):
+    def test_regular_login(self):
         self.result = get_token(user_name,pwd, baseUrl)
         assert "access_token" in self.result.json()
 

@@ -12,7 +12,6 @@ from typing import Any, Text
 from dingtalkchatbot.chatbot import DingtalkChatbot, FeedLink
 
 from src.file_case.allure_report_data import AllureFileClean
-from src.file_case.get_local_ip import get_host_ip
 from src.read_yaml.read_yaml import Read_yaml
 
 

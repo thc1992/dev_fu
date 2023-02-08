@@ -36,9 +36,8 @@ class Test_quote_enter:
         datas = {
             "id": quote_offer[0][0],
             "requestOrderId": quote_offer[0][1],
-            "processedTaskId": quote_offer[0][2],
             "approvalState": "PASS",
-            "remark": "通过报价审核",
+            "approvalRemark": "通过报价审核",
         }
         res = request_all(self.url_use, datas, headers)
         assert res.json()['code'] == 200
@@ -66,9 +65,8 @@ class Test_quote_enter:
         datas = {
             "id": quote_offer[0][0],
             "requestOrderId": quote_offer[0][1],
-            "processedTaskId": quote_offer[0][2],
             "approvalState": "REJECT",
-            "remark": "拒绝报价审核",
+            "approvalRemark": "拒绝报价审核",
         }
         res = request_all(self.url_use, datas, headers)
         assert res.json()['code'] == 200

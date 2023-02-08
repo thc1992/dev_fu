@@ -21,7 +21,7 @@ if __name__ == '__main__':
     #              '--alluredir', './report/tmp', "--clean-alluredir"])
     # 生成可视化报告
     pytest.main(
-        ['-v', '-m', 'one', os.path.dirname(os.path.abspath(__file__)) + '/src/list', '--alluredir', './report/tmp',
+        ['-v', '-m', 'one  or  two', os.path.dirname(os.path.abspath(__file__)) + '/src/list', '--alluredir', './report/tmp',
          "--clean-alluredir"])
     reader_pro(os.path.dirname(os.path.abspath(__file__)))
 

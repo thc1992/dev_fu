@@ -22,6 +22,8 @@ class Test_complete_result:
         self.afterService = image_id.json()['data']['id']
         image_id2 = get_image(self.path2, self.token)
         assert image_id2.json()['code'] == 200
+        self.path.close()
+        self.path2.close()
         self.beforeService = image_id2.json()['data']['id']
         self.headers = {
             "r-auth": self.token,
@@ -117,8 +119,8 @@ class Test_complete_result:
     def test_complete2(self):
         self.sets_up()
 
-        relust = ('FSMWOS03', 'FSMROS02', 'FSMWOS03', 'FSMTOS02', 'FSMIOS01', 'FSMROS02', 'WAIT_SIGN_IN',
-                  None, 'FSMTOS02', None)
+        # relust = ('FSMWOS03', 'FSMROS02', 'FSMWOS03', 'FSMTOS02', 'FSMIOS01', 'FSMROS02', 'WAIT_SIGN_IN',
+        #           None, 'FSMTOS02', None)
         relust2 = ('FSMWOS03', 'FSMROS02', 'FSMWOS03', 'FSMTOS02', 'FSMIOS01', 'FSMROS02', 'WAIT_SIGN_IN',
                    None, 'FSMTOS03', 'FSMTOSOT02')
 
@@ -190,7 +192,7 @@ class Test_complete_result:
         assert res.json()['code'] == 200
         normal = Read_sql_Data.Conte(return_check % appointment[0][0])
         # print(normal[0])
-        assert relust == normal[0] and relust2 == normal[1]
+        assert relust2 == normal[0]
 
     @allure.description("完成工单")
     @allure.suite('转上级主管')

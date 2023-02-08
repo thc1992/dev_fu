@@ -22,6 +22,7 @@ class Test_place_order:
         path = open(os.path.dirname(os.path.abspath(__file__)) + '/../common/city.jpg', 'rb')
         print(path)
         self.image_id = get_image(path, self.token)
+        path.close()
         self.place_order = Read_sql_Data.Conte(place_order)
         self.prace_name = "空调维修自动化"
         self.prace_version = Read_sql_Data.Conte(prace_order_version % self.prace_name)
@@ -57,7 +58,7 @@ class Test_place_order:
             "brandId": self.place_order[0][1],
             "genericFlag": 'false',
             "contactPerson":name_phone[0][1],
-            "contactPhone":self.user_name,
+            "contactPhone":name_phone[0][3],
             "serviceId": self.prace_version[0][0],  # r_production 通过名称获取id  这里id值是"serviceId":
             "serviceVersion": self.prace_version[0][1],
             "propValues": [
@@ -112,8 +113,8 @@ class Test_place_order:
             ]
         }
 
-        res = requests.post(url=self.url_use, json=data, headers=headers)
-        log_show(res, data, showlog=1)
+        res = request_all(self.url_use, data, headers=headers)
+        # log_show(res, data, showlog=1)
         assert res.json()['code'] == 200
         # print(res.json())
         relut = place_check % res.json()['data']['id']
@@ -129,3 +130,4 @@ class Test_place_order:
         old_data = Read_yaml().read_yaml_all('token.yaml')  # 读取文件数据
         old_data['requestOrderId'] = str(res.json()['data']['id'])
         Read_yaml().update_yaml(old_data, 'token.yaml')
+        return str(res.json()['data']['id'])

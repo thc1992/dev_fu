@@ -2,7 +2,7 @@ project_name: derfu
 
 evn: test
 # 测试人员名称，作用于自动生成代码的作者，以及发送企业微信、钉钉通知的测试负责人
-tester_name: 唐洪超
+tester_name: 测试
 
 # 域名1
 host: http://192.168.11.94:30010
